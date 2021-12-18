@@ -23,7 +23,7 @@ struct ExchangeRateParser {
             throw ExchangeRateParserError.missingObservations
         }
 
-        return try observations.map(parseObservation)
+        return observations.compactMap({ try? parseObservation($0) })
     }
 
     private static func parseObservation(_ element: XMLElement) throws -> ExchangeRate {
